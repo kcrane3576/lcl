@@ -7,10 +7,14 @@ SCORER_IMAGE="ghcr.io/chps-dev/chps-scorer:latest"
 
 mkdir -p "$REPORT_DIR"
 
-echo "Scoring image: $IMAGE"
-echo "Using Dockerfile: $DOCKERFILE"
-echo "Writing reports to: $REPORT_DIR"
+echo "============================================================"
+echo "  CHPs Score Report"
+echo "  Image:       $IMAGE"
+echo "  Dockerfile:  $DOCKERFILE"
+echo "  Output dir:  $REPORT_DIR"
+echo "============================================================"
 echo
+
 
 # Text report
 echo "Generating text report..."
@@ -24,5 +28,14 @@ docker run --rm --privileged \
   > "$REPORT_DIR/chps-score.txt"
 
 echo
+echo "------------------------------------------------------------"
+echo "  Human-readable summary"
+echo "------------------------------------------------------------"
+cat "$REPORT_DIR/chps-score.txt"
+echo "------------------------------------------------------------"
+echo
+echo "JSON report saved to:"
+echo "  $REPORT_DIR/chps-score.json"
+echo
 echo "Done!"
-echo "Text report: $REPORT_DIR/chps-score.txt"
+echo "============================================================"
