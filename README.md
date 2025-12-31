@@ -18,7 +18,7 @@ Build: `make build`
 docker build -f Dockerfile.lcl -t al2023-dev .
 ```
 
-Run (interactive shell): `make run | make shell`
+Run (interactive shell): `make run` or `make shell`
 ```shell
 docker run --rm -it \
   -v "$PWD":/workspace \
@@ -27,7 +27,7 @@ docker run --rm -it \
   /bin/bash
 ```
 
-Verbose / Debug Build: `make debug-build | make rebuild`
+Verbose / Debug Build: `make debug-build` or `make rebuild`
 ```shell
 docker build -f Dockerfile.lcl \
   --no-cache \
@@ -45,7 +45,7 @@ docker run --rm -it \
   bash -lx
 ```
 
-CHPs Score Dockerfile.lcl: `make score` (requires `make build`)
+CHPs Score `Dockerfile.lcl`: `make score` (requires `make build`)
 ```shell
 scripts/run-score.sh al2023-dev
 ```
