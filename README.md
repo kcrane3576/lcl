@@ -1,9 +1,16 @@
+# Do
+```shell
+chmod +x scripts/run-score.sh
+```
+
 # Use
 ```shell
 make build
 make debug-build
 make run
 make debug-run
+# Get chps-score for Dockerfile.lcl
+make score
 ```
 
 Build: `make build`
@@ -36,4 +43,9 @@ docker run --rm -it \
   -w /workspace \
   al2023-dev \
   bash -lx
+```
+
+Score Dockerfile.lcl: `make score (requires make build)`
+```shell
+scripts/run-score.sh al2023-dev
 ```

@@ -3,7 +3,10 @@ TAG ?= latest
 IMAGE := $(IMAGE_NAME):$(TAG)
 DOCKERFILE ?= Dockerfile.lcl
 
-.PHONY: build rebuild run debug-build debug-run shell
+# Scorer image (separate container that analyzes $(IMAGE))
+SCORER_IMAGE ?= ghcr.io/chps-dev/chps-scorer:latest
+
+.PHONY: build rebuild run debug-build debug-run shell score
 
 ## Build the image (normal)
 build:
@@ -28,3 +31,8 @@ debug-run:
 		-w /workspace \
 		$(IMAGE) \
 		bash -lx
+
+## Build the image and run a CHPs score against it
+score: build
+	@echo ">>> Running score for $(IMAGE) using $(SCORER_IMAGE)"
+	./scripts/run-score.sh $(IMAGE)

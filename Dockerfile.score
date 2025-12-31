@@ -1,0 +1,28 @@
+# Start FROM the image built by Dockerfile.lcl
+ARG BASE_IMAGE=al2023-dev:local
+FROM ${BASE_IMAGE}
+
+# Install tools that chps-scorer needs
+RUN dnf -y update && \
+    dnf -y install \
+      git \
+      curl \
+      jq \
+      docker && \
+    dnf clean all
+
+# Put chps-scorer under /opt/chps-scorer
+WORKDIR /opt
+
+ARG CHPS_SCORER_REPO="https://github.com/chps-dev/chps-scorer.git"
+ARG CHPS_SCORER_REF="main"
+
+RUN git clone --branch "${CHPS_SCORER_REF}" --depth 1 "${CHPS_SCORER_REPO}" chps-scorer
+
+# Your simple scoring script (lives in your repo)
+# scripts/run-score.sh must be executable in your repo
+    COPY scripts/run-score.sh /usr/local/bin/run-score.sh
+RUN chmod +x /usr/local/bin/run-score.sh
+
+# We'll set the working directory at runtime to $PWD from the host.
+ENTRYPOINT ["run-score.sh"]
