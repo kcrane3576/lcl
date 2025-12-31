@@ -33,9 +33,5 @@ echo "  Human-readable summary"
 echo "------------------------------------------------------------"
 cat "$REPORT_DIR/chps-score.txt"
 echo "------------------------------------------------------------"
-echo
-echo "JSON report saved to:"
-echo "  $REPORT_DIR/chps-score.json"
-echo
 echo "Done!"
 echo "============================================================"
