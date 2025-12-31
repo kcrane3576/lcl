@@ -45,7 +45,7 @@ docker run --rm -it \
   bash -lx
 ```
 
-Score Dockerfile.lcl: `make score (requires make build)`
+CHPs Score Dockerfile.lcl: `make score ` (requires `make build`)
 ```shell
 scripts/run-score.sh al2023-dev
 ```
