@@ -50,7 +50,7 @@ run-al2023 shell-al2023: build-al2023
 		/bin/bash
 
 ## Run an interactive shell with bash tracing enabled
-debug-run-al2023: build
+debug-run-al2023: build-al2023
 	docker run --rm -it \
 		-v "$$PWD":/workspace \
 		-w /workspace \
