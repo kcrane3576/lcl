@@ -12,7 +12,6 @@ export default defineConfig({
   },
 
   // Put all artifacts in a predictable directory
-  // outputDir: "/results/tests/playwright-test-results",
   outputDir: process.env.PLAYWRIGHT_TEST_RESULTS_DIR || "playwright-test-results",
 
 
