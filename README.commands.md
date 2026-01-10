@@ -1,4 +1,4 @@
-# AL2023 Commands
+# AL2023
 Build: `make build`
 ```shell
 docker build -f Dockerfile -t al2023-dev .
@@ -36,8 +36,28 @@ CHPs Score `Dockerfile`: `make score` (requires `make build`)
 scripts/run-score.sh al2023-dev
 ```
 
-# Playwright Commands
+# Playwright
 Build: `make build pw`
 ```shell
 docker build -f Dockerfile.playwright -t playwright-test .
+```
+
+## Test
+```shell
+docker build -t pw-min:chrome-firefox .
+```
+
+```
+docker run --rm \
+  -v "$PWD/test-results:/work/test-results" \
+  pw-min:chrome-firefox
+```
+
+```
+docker build -t pw-min:chrome-firefox .
+rm -rf test-results && mkdir -p test-results
+
+docker run --rm \
+  -v "$PWD/test-results:/work/test-results" \
+  pw-min:chrome-firefox
 ```
