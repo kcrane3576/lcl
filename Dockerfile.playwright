@@ -6,7 +6,6 @@ ENV PLAYWRIGHT_TEST_RESULTS_DIR=$PLAYWRIGHT_TEST_RESULTS_DIR
 WORKDIR /work
 
 # Install Playwright system deps via Playwright helper
-# (This installs OS packages needed to run browsers on Debian slim.)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
@@ -19,7 +18,6 @@ COPY playwright/package.json ./
 RUN npm install
 
 # Install only Chromium + Firefox and their OS deps
-# NOTE: install-deps installs the required Linux libs for the selected browsers.
 RUN npx playwright install-deps chromium firefox \
  && npx playwright install chromium firefox
 
@@ -28,7 +26,6 @@ COPY playwright/playwright.config.ts ./
 COPY playwright/tests ./tests
 
 # Default output directory we’ll mount for artifacts
-# RUN mkdir -p $(TEST_RESULTS_DIR)/playwright-test-results
 RUN mkdir -p "$PLAYWRIGHT_TEST_RESULTS_DIR"
 
 # Run tests by default
