@@ -1,51 +1,25 @@
-# Do
+# Requirements
+- Docker
+- Make
 ```shell
 chmod +x scripts/run-score.sh
 ```
 
-# Use
+# Quickstart
 ```shell
+# Playwright
+make build-playwright
+make playwright-test-results
+
+# AL2023
 make build
-make debug-build
-make run
-make debug-run
-# Get chps-score for Dockerfile.lcl
-make score
+make score-al2023
+make score-playwright
+
+# All
+make score-all
 ```
 
-Build: `make build`
-```shell
-docker build -f Dockerfile.lcl -t al2023-dev .
-```
-
-Run (interactive shell): `make run` or `make shell`
-```shell
-docker run --rm -it \
-  -v "$PWD":/workspace \
-  -w /workspace \
-  al2023-dev \
-  /bin/bash
-```
-
-Verbose / Debug Build: `make debug-build` or `make rebuild`
-```shell
-docker build -f Dockerfile.lcl \
-  --no-cache \
-  --progress=plain \
-  -t al2023-dev-debug \
-  .
-```
-
-Verbose / Debug Run: `make debug-run`
-```shell
-docker run --rm -it \
-  -v "$PWD":/workspace \
-  -w /workspace \
-  al2023-dev \
-  bash -lx
-```
-
-CHPs Score `Dockerfile.lcl`: `make score` (requires `make build`)
-```shell
-scripts/run-score.sh al2023-dev
-```
+# Artifacts
+- Playwright artifacts: `results/tests/`
+- Score artifacts: `results/scores/`
