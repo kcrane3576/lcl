@@ -11,7 +11,7 @@ export default defineConfig({
   },
 
   // Put all artifacts in a predictable directory
-  outputDir: "test-results",
+  outputDir: "/results/tests/playwright-test-results",
 
   // Only run these browsers (no WebKit)
   projects: [

@@ -1,5 +1,7 @@
 # Minimal Node base. We'll install only the deps Playwright needs for chromium+firefox.
 FROM node:20-bookworm-slim
+ARG PLAYWRIGHT_TEST_RESULTS_DIR=/results/tests/playwright-test-results
+ENV PLAYWRIGHT_TEST_RESULTS_DIR=$PLAYWRIGHT_TEST_RESULTS_DIR
 
 WORKDIR /work
 
@@ -26,7 +28,8 @@ COPY playwright.config.ts ./
 COPY tests ./tests
 
 # Default output directory we’ll mount for artifacts
-RUN mkdir -p /work/test-results
+# RUN mkdir -p $(TEST_RESULTS_DIR)/playwright-test-results
+RUN mkdir -p "$PLAYWRIGHT_TEST_RESULTS_DIR"
 
 # Run tests by default
 CMD ["npx", "playwright", "test"]

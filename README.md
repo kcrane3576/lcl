@@ -8,18 +8,13 @@ chmod +x scripts/run-score.sh
 # Quickstart
 ```shell
 # Playwright
-make build-playwright
 make playwright-test-results
-
-# AL2023
-make build
-make score-al2023
 make score-playwright
 
-# All
-make score-all
+# AL2023
+make score-al2023
 ```
 
 # Artifacts
-- Playwright artifacts: `results/tests/`
-- Score artifacts: `results/scores/`
+- Playwright artifacts: `results/tests/*`
+- Score artifacts: `results/scores/*`

@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
+# Input arguments
 IMAGE=$1
-DOCKERFILE="$PWD/Dockerfile.lcl"
-REPORT_DIR="$PWD/score-report"
+DOCKERFILE="$PWD/$2"
+REPORT_DIR="$3"
+
+# chps-scorer image
 SCORER_IMAGE="ghcr.io/chps-dev/chps-scorer:latest"
 
 mkdir -p "$REPORT_DIR"
@@ -11,7 +14,7 @@ echo "============================================================"
 echo "  CHPs Score Report"
 echo "  Image:       $IMAGE"
 echo "  Dockerfile:  $DOCKERFILE"
-echo "  Output dir:  $REPORT_DIR"
+echo "  Report:  $REPORT_DIR"
 echo "============================================================"
 echo
 
