@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy package manifests first for better Docker caching
-COPY package.json ./
+COPY playwright/package.json ./
 
 # Install node deps
 RUN npm install
@@ -24,8 +24,8 @@ RUN npx playwright install-deps chromium firefox \
  && npx playwright install chromium firefox
 
 # Copy the rest
-COPY playwright.config.ts ./
-COPY tests ./tests
+COPY playwright/playwright.config.ts ./
+COPY playwright/tests ./tests
 
 # Default output directory we’ll mount for artifacts
 # RUN mkdir -p $(TEST_RESULTS_DIR)/playwright-test-results
