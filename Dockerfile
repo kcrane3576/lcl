@@ -1,0 +1,32 @@
+# Minimal Node base. We'll install only the deps Playwright needs for chromium+firefox.
+FROM node:20-bookworm-slim
+
+WORKDIR /work
+
+# Install Playwright system deps via Playwright helper
+# (This installs OS packages needed to run browsers on Debian slim.)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy package manifests first for better Docker caching
+COPY package.json ./
+
+# Install node deps
+RUN npm install
+
+# Install only Chromium + Firefox and their OS deps
+# NOTE: install-deps installs the required Linux libs for the selected browsers.
+RUN npx playwright install-deps chromium firefox \
+ && npx playwright install chromium firefox
+
+# Copy the rest
+COPY playwright.config.ts ./
+COPY tests ./tests
+
+# Default output directory we’ll mount for artifacts
+RUN mkdir -p /work/test-results
+
+# Run tests by default
+CMD ["npx", "playwright", "test"]
